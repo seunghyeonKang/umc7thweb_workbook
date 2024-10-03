@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from "./Button";
+import Input from "./Input";
+import "./todoList_style.css";
 
 export default function TodoList() {
   const [todos, setTodos] = useState([{ id: 1, task: "투두리스트를 작성해보세요." }]);
@@ -39,171 +42,31 @@ export default function TodoList() {
   };
 
   return (
-    <div
-      style={{
-        boxSizing: "border-box",
-        margin: 0,
-        padding: "40px",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <form
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <input
-          style={{
-            marginRight: "12px",
-            padding: "12px",
-            width: "50vw",
-          }}
-          placeholder="할 일을 적어주세요"
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button
-          style={{
-            width: "100px",
-            height: "43px",
-
-            textAlign: "center",
-            fontSize: "14px",
-            fontWeight: "900",
-            color: "white",
-
-            border: "none",
-            backgroundColor: "dimgray",
-            cursor: "pointer",
-          }}
-          type="submit"
-          onClick={addTodo}
-        >
+    <div className="todo-container">
+      <form className="todo-form" onSubmit={handleSubmit}>
+        <input placeholder="할 일을 적어주세요" type="text" value={text} onChange={(e) => setText(e.target.value)} />
+        <button type="submit" onClick={addTodo}>
           할 일 등록
         </button>
       </form>
 
-      <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-          width: `calc(50vw + 136px)`,
-
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-        }}
-      >
+      <ul className="todo-list">
         {todos.map(({ id, task }, _) => (
-          <li
-            style={{
-              width: `calc(50vw + 136px)`,
-
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-            key={id}
-          >
+          <li className="todo-item" key={id}>
             {editingId === id ? (
               <>
-                <input
-                  style={{
-                    boxSizing: "border-box",
-                    margin: "20px 0",
-                    padding: "4px",
-                    width: `calc(50vw + 136px - 84px - 84px)`,
-                  }}
-                  type="text"
-                  defaultValue={task}
-                  onChange={(e) => setEditText(e.target.value)}
-                />
-                <button
-                  style={{
-                    width: "72px",
-                    height: "28px",
-                    marginLeft: "12px",
-
-                    textAlign: "center",
-
-                    border: "none",
-                    backgroundColor: "whitesmoke",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => updateTodo(editingId, editText)}
-                >
-                  수정완료
-                </button>
-                <button
-                  style={{
-                    width: "72px",
-                    height: "28px",
-                    marginLeft: "12px",
-
-                    textAlign: "center",
-
-                    border: "none",
-                    backgroundColor: "whitesmoke",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => deleteTodo(id)}
-                >
-                  삭제하기
-                </button>
+                <Input task={task} handleFunc={(e) => setEditText(e.target.value)} />
+                <Button text={"수정완료"} handleFunc={() => updateTodo(editingId, editText)} />
+                <Button text={"삭제하기"} handleFunc={() => deleteTodo(id)} />
               </>
             ) : (
               <>
-                <h4
-                  style={{
-                    margin: "20px 0",
-                    width: `calc(50vw + 136px - 84px - 84px)`,
-                  }}
-                >
+                <h4>
                   {/* {id}. */}
                   {task}
                 </h4>
-                <button
-                  style={{
-                    width: "72px",
-                    height: "28px",
-                    marginLeft: "12px",
-
-                    textAlign: "center",
-
-                    border: "none",
-                    backgroundColor: "whitesmoke",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setEditingId(id)}
-                >
-                  수정하기
-                </button>
-                <button
-                  style={{
-                    width: "72px",
-                    height: "28px",
-                    marginLeft: "12px",
-
-                    textAlign: "center",
-
-                    border: "none",
-                    backgroundColor: "whitesmoke",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => deleteTodo(id)}
-                >
-                  삭제하기
-                </button>
+                <Button text={"수정하기"} handleFunc={() => setEditingId(id)} />
+                <Button text={"삭제하기"} handleFunc={() => deleteTodo(id)} />
               </>
             )}
           </li>
