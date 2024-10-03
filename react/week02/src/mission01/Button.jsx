@@ -1,4 +1,4 @@
-export default function Button({ text, handleFunc }) {
+export default function Button({ text, handleOnClick }) {
   return (
     <button
       style={{
@@ -12,7 +12,7 @@ export default function Button({ text, handleFunc }) {
         backgroundColor: "whitesmoke",
         cursor: "pointer",
       }}
-      onClick={handleFunc}
+      onClick={handleOnClick}
     >
       {text}
     </button>

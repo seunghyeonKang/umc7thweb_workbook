@@ -1,4 +1,4 @@
-export default function Input({ task, handleFunc }) {
+export default function Input({ task, handleOnChange }) {
   return (
     <input
       style={{
@@ -9,7 +9,7 @@ export default function Input({ task, handleFunc }) {
       }}
       type="text"
       defaultValue={task}
-      onChange={handleFunc}
+      onChange={handleOnChange}
     />
   );
 }

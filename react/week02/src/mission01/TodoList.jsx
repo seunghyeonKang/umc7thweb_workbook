@@ -38,13 +38,17 @@ export default function TodoList() {
   const updateTodo = (id, editText) => {
     setTodos((prev) => prev.map((item) => (item.id === id ? { ...item, task: editText } : item)));
     setEditingId(0);
-    // setEditText("");
   };
 
   return (
     <div className="todo-container">
       <form className="todo-form" onSubmit={handleSubmit}>
-        <input placeholder="할 일을 적어주세요" type="text" value={text} onChange={(e) => setText(e.target.value)} />
+        <input
+          placeholder="할 일을 적어주세요"
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
         <button type="submit" onClick={addTodo}>
           할 일 등록
         </button>
@@ -55,9 +59,9 @@ export default function TodoList() {
           <li className="todo-item" key={id}>
             {editingId === id ? (
               <>
-                <Input task={task} handleFunc={(e) => setEditText(e.target.value)} />
-                <Button text={"수정완료"} handleFunc={() => updateTodo(editingId, editText)} />
-                <Button text={"삭제하기"} handleFunc={() => deleteTodo(id)} />
+                <Input task={task} handleOnChange={(e) => setEditText(e.target.value)} />
+                <Button text={"수정완료"} handleOnClick={() => updateTodo(editingId, editText)} />
+                <Button text={"삭제하기"} handleOnClick={() => deleteTodo(id)} />
               </>
             ) : (
               <>
@@ -65,8 +69,14 @@ export default function TodoList() {
                   {/* {id}. */}
                   {task}
                 </h4>
-                <Button text={"수정하기"} handleFunc={() => setEditingId(id)} />
-                <Button text={"삭제하기"} handleFunc={() => deleteTodo(id)} />
+                <Button
+                  text={"수정하기"}
+                  handleOnClick={() => {
+                    setEditingId(id);
+                    setEditText(task);
+                  }}
+                />
+                <Button text={"삭제하기"} handleOnClick={() => deleteTodo(id)} />
               </>
             )}
           </li>
