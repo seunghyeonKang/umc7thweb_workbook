@@ -1,9 +1,12 @@
+import React from "react";
+import TodoList from "./mission01/TodoList";
 import MoviePage from "./mission02/MoviePage";
 
 function App() {
   return (
     <>
-      <MoviePage />
+      <TodoList />
+      {/* <MoviePage /> */}
     </>
   );
 }
