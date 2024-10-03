@@ -13,12 +13,20 @@ function MovieComponent({ extraPath }) {
   };
 
   return (
-    <li style={{ margin: "6px", width: "72px", height: "108px" }}>
+    <li
+      style={{
+        margin: "6px",
+        width: "72px",
+        height: "108px",
+
+        borderRadius: "6px",
+        overflow: "hidden",
+      }}
+    >
       <img
         style={{
           width: "72px",
           boxSizing: "border-box",
-          borderRadius: "6px",
         }}
         src={`https://image.tmdb.org/t/p/w500${extraPath}`}
         alt="poster"
@@ -26,7 +34,6 @@ function MovieComponent({ extraPath }) {
       <div
         style={{
           // 이부분 개선 필요
-          borderRadius: "6px",
           position: "relative",
           top: "-112px",
           left: 0,
