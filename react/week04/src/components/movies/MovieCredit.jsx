@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useCustomAxios from "../../hooks/useCustomAxios";
-import MovieInfo from "../../components/movies/MovieInfo";
-import MovieCredit from "../../components/movies/MovieCredit";
 
 const Container = styled.div`
   margin: 0;
@@ -20,21 +18,24 @@ const Contents = styled.h2`
 
 // const { movies, loading, error } = useCustomAxios(`/movie/${path}?language=ko-US&page=1`);
 
-export default function MovieDetail() {
-  const { movieId } = useParams();
-  // const params = useParams();
-  // console.log(params);
-
-  const { movies, loading, error } = useCustomAxios(`/movie/${movieId}?language=ko-US`);
-  console.log(movies);
+export default function MovieCredit({ movieId }) {
+  const { movies, loading, error } = useCustomAxios(`movie/${movieId}/credits?language=ko-US`);
+  console.log("감독/출연", movies);
 
   if (loading) return <p style={{ color: "white" }}>Loading...</p>;
   if (error) return <p style={{ color: "white" }}>Error: {error}</p>;
 
   return (
     <Container>
-      <MovieInfo movieId={movieId} />
-      <MovieCredit movieId={movieId} />
+      <Contents>감독/출연</Contents>
+      {movies.data?.cast.map((movie) => {
+        return (
+          <li key={movie.id} movie={movie}>
+            <p>{movie.name}</p>
+            <p>{movie.original_name}</p>
+          </li>
+        );
+      })}
     </Container>
   );
 }

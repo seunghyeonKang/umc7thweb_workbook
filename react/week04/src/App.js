@@ -64,16 +64,6 @@ const browserRouter = createBrowserRouter([
             path: "up-coming",
             element: <MovieList path={"upcoming"} category="개봉 예정중인 영화" />,
           },
-        ],
-      },
-      {
-        path: "movie-detail",
-        element: <MoviesLayout />,
-        children: [
-          {
-            index: true,
-            element: <NotFound />,
-          },
           {
             path: ":movieId",
             element: <MovieDetail />,

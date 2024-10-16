@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../apis/axios-instance";
 
+// 사용 방식
+// const { movies, loading, error } = useCustomAxios(`/movie/${path}?language=ko-US&page=1`);
+
 const useCustomAxios = (url) => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,7 +26,7 @@ const useCustomAxios = (url) => {
     };
     getMovies();
   }, [url]);
-  // console.log(movies);
+  console.log(movies);
 
   return { movies, loading, error };
 };

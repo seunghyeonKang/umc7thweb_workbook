@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import MovieComponent from "../../components/movies/MovieComponent";
 import useCustomAxios from "../../hooks/useCustomAxios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0;
@@ -29,6 +30,13 @@ const ContainerUl = styled.ul`
 export default function MovieList({ path, category }) {
   const { movies, loading, error } = useCustomAxios(`/movie/${path}?language=ko-US&page=1`);
 
+  const navigate = useNavigate();
+  const handleMoveToDetail = (id) => {
+    navigate(`/movies/${id}`, {
+      replace: false,
+    });
+  };
+
   if (loading) return <p style={{ color: "white" }}>Loading...</p>;
   if (error) return <p style={{ color: "white" }}>Error: {error}</p>;
 
@@ -37,7 +45,13 @@ export default function MovieList({ path, category }) {
       <Contents>{category}</Contents>
       <ContainerUl>
         {movies.data?.results.map((movie) => {
-          return <MovieComponent key={movie.id} movie={movie} />;
+          return (
+            <MovieComponent
+              handleMoveToDetail={() => handleMoveToDetail(movie.id)}
+              key={movie.id}
+              movie={movie}
+            />
+          );
         })}
       </ContainerUl>
     </Container>

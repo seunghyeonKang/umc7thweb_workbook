@@ -46,9 +46,9 @@ const MovieDate = styled.p`
   color: #a3a3a3;
 `;
 
-export default function MovieComponent({ movie }) {
+export default function MovieComponent({ movie, handleMoveToDetail }) {
   return (
-    <MovieItem>
+    <MovieItem onClick={handleMoveToDetail}>
       <ImgContainer>
         <MovieImg src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="poster" />
         <Overlay />
