@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import useCustomAxios from "../../hooks/useCustomAxios";
 import MovieInfo from "../../components/movies/MovieInfo";
 import MovieCredit from "../../components/movies/MovieCredit";
 
@@ -24,12 +23,6 @@ export default function MovieDetail() {
   const { movieId } = useParams();
   // const params = useParams();
   // console.log(params);
-
-  const { movies, loading, error } = useCustomAxios(`/movie/${movieId}?language=ko-US`);
-  console.log(movies);
-
-  if (loading) return <p style={{ color: "white" }}>Loading...</p>;
-  if (error) return <p style={{ color: "white" }}>Error: {error}</p>;
 
   return (
     <Container>

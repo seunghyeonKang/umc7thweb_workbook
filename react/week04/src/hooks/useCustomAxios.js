@@ -3,6 +3,7 @@ import { axiosInstance } from "../apis/axios-instance";
 
 // 사용 방식
 // const { movies, loading, error } = useCustomAxios(`/movie/${path}?language=ko-US&page=1`);
+// console.log("hook: ", movies);
 
 const useCustomAxios = (url) => {
   const [movies, setMovies] = useState();
@@ -26,7 +27,7 @@ const useCustomAxios = (url) => {
     };
     getMovies();
   }, [url]);
-  console.log(movies);
+  // console.log("hook: ", movies);
 
   return { movies, loading, error };
 };
