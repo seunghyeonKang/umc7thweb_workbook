@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
   margin: 0;
   padding: 20px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 
   color: #ffffff;
 `;
@@ -18,6 +19,10 @@ export default function NotFound() {
   return (
     <Container>
       <Contents>경로가 잘못된 페이지입니다.</Contents>
+      <br />
+      <Link to="/">
+        <Contents>메인 페이지로 돌아가기</Contents>
+      </Link>
     </Container>
   );
 }
