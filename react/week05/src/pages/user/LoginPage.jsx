@@ -1,8 +1,9 @@
 import useForm from "../../hooks/use-form";
 import { validateLogin } from "../../utils/Validate";
-import * as A from "./LoginPage.style";
+import * as A from "./UserPage.style";
 import { useState } from "react";
 
+// useForm 없이 custom hook을 이용한 유효성 검사
 export default function LoginPage() {
   const login = useForm({
     initialValue: {
