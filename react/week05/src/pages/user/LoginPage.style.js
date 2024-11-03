@@ -25,18 +25,18 @@ export const FormContainer = styled.form`
   align-items: center;
 `;
 export const InputBox = styled.input`
-  margin-top: 12px;
+  margin-top: 8px;
   padding: 12px;
   width: 400px;
   height: 48px;
 
-  border: none;
+  border: ${(props) => (props.$error ? "2px solid red" : "2px solid black")};
   border-radius: 6px;
 
   font-size: 15px;
 `;
 export const SubmitBox = styled(InputBox)`
-  background-color: ${(props) => (props.isValid ? "crimson" : "#cccccc")};
+  background-color: ${(props) => (props.$isValid ? "crimson" : "#cccccc")};
 
   font-size: 16px;
   font-weight: 900;
@@ -45,7 +45,7 @@ export const SubmitBox = styled(InputBox)`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.isValid && (props.$hoverColor || "crimson")};
+    background-color: ${(props) => props.$isValid && (props.$hoverColor || "crimson")};
   }
 `;
 export const SpanText = styled.span`
